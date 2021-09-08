@@ -6,16 +6,14 @@ function submitIssue(e) {
   const id = Math.floor(Math.random() * 100000000) + '';
   const status = 'Open';
 
-  if (description.length == 0 || assignedTo.length == 0) {
-    const addBtn = document.getElementById('add-issue');
-    addBtn.setAttribute("data-toggle", "modal");
-    addBtn.setAttribute("data-target", "#emptyField")
-    return;
+  if ((description.length == 0) || (assignedTo.length == 0)) {
+    console.log('Kireee')
+    document.getElementById('add-issue').setAttribute("data-toggle", "modal");
+    document.getElementById('add-issue').setAttribute("data-target", "#emptyField")
   }
   else {
-    const addBtn = document.getElementById('add-issue');
-    addBtn.removeAttribute("data-toggle", "modal");
-    addBtn.removeAttribute("data-target", "#emptyField")
+    document.getElementById('add-issue').removeAttribute("data-toggle", "modal");
+    document.getElementById('add-issue').removeAttribute("data-target", "#emptyField")
     const issue = { id, description, severity, assignedTo, status };
     let issues = [];
     if (localStorage.getItem('issues')) {
@@ -24,11 +22,9 @@ function submitIssue(e) {
     issues.push(issue);
     localStorage.setItem('issues', JSON.stringify(issues));
 
-    document.getElementById('issueInputForm').reset();
+
     fetchIssues();
   }
-
-
 }
 
 const closeIssue = id => {
